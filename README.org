@@ -1,0 +1,13 @@
+#+TITLE: nerd-icons-completion - Use nerd-icons for Dired
+#+AUTHOR: Hongyu Ding
+#+LANGUAGE: en
+
+nerd-icons-completion is inspired by [[https://github.com/iyefrat/all-the-icons-completion][all-the-icons-completion]].
+
+* Usage
+#+BEGIN_SRC emacs-lisp
+  (use-package nerd-icons-completion
+    :straight (nerd-icons-completion :type git :host github :repo "rainstormstudio/nerd-icons-completion")
+    :config
+    (nerd-icons-completion-mode))
+#+END_SRC
