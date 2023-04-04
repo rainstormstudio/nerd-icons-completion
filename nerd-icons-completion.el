@@ -66,7 +66,7 @@
     (concat
      (if (symbolp icon)
          (if (symbolp parent-icon)
-             (nerd-icons-faicon "sticky-note-o")
+             (nerd-icons-faicon "nf-fa-sticky_note_o")
            parent-icon)
        icon)
      " ")))
@@ -76,7 +76,7 @@
   "Return the icon for the candidate CAND of completion category bookmark."
   (if-let (fname (bookmark-get-filename cand))
       (nerd-icons-completion-get-icon fname 'file)
-    (concat (nerd-icons-octicon "bookmark" :face 'nerd-icons-completion-dir-face) " ")))
+    (concat (nerd-icons-octicon "nf-oct-bookmark" :face 'nerd-icons-completion-dir-face) " ")))
 
 (defun nerd-icons-completion-completion-metadata-get (orig metadata prop)
   "Meant as :around advice for `completion-metadata-get', Add icons as prefix.
