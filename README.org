@@ -1,4 +1,4 @@
-#+TITLE: nerd-icons-completion - Use nerd-icons for Dired
+#+TITLE: nerd-icons-completion - Use nerd-icons for completion
 #+AUTHOR: Hongyu Ding
 #+LANGUAGE: en
 
