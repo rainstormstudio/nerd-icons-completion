@@ -17,3 +17,19 @@ or with ~use-package~
     :config
     (nerd-icons-completion-mode))
 #+END_SRC
+
+* Setup
+
+If you want to use it with [[https://github.com/minad/marginalia/][marginalia]], add the following to your init file
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
+#+END_SRC
+or, with ~use-package~:
+#+BEGIN_SRC emacs-lisp
+  (use-package nerd-icons-completion
+    :after marginalia
+    :hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
+    :config
+    (nerd-icons-completion-mode))
+#+END_SRC
