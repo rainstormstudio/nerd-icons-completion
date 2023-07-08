@@ -6,6 +6,16 @@
 
 nerd-icons-completion is inspired by [[https://github.com/iyefrat/all-the-icons-completion][all-the-icons-completion]].
 
+* Screenshots
+** default completion in terminal
+[[file:screenshots/demo1.png]]
+** default completion in GUI
+[[file:screenshots/demo3.png]]
+** vertico + marginalia in terminal
+[[file:screenshots/demo2.png]]
+** vertico + marginalia in GUI
+[[file:screenshots/demo4.png]]
+
 * Usage
 #+BEGIN_SRC emacs-lisp
   (require 'nerd-icons-completion)
