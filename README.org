@@ -39,7 +39,7 @@ or, with ~use-package~:
 #+BEGIN_SRC emacs-lisp
   (use-package nerd-icons-completion
     :after marginalia
-    :hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
     :config
-    (nerd-icons-completion-mode))
+    (nerd-icons-completion-mode)
+    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 #+END_SRC
