@@ -139,8 +139,12 @@ PROP is the property which is looked up."
   "Add icons to completion candidates."
   :global t
   (if nerd-icons-completion-mode
-      (advice-add #'completion-metadata-get :around #'nerd-icons-completion-completion-metadata-get)
-    (advice-remove #'completion-metadata-get #'nerd-icons-completion-completion-metadata-get)))
+      (progn
+	(advice-add #'completion-metadata-get :around #'nerd-icons-completion-completion-metadata-get)
+	(advice-add (compat-function completion-metadata-get) :around #'nerd-icons-completion-completion-metadata-get))
+    (progn
+      (advice-remove #'completion-metadata-get #'nerd-icons-completion-completion-metadata-get)
+      (advice-remove (compat-function completion-metadata-get) #'nerd-icons-completion-completion-metadata-get))))
 
 (provide 'nerd-icons-completion)
 ;;; nerd-icons-completion.el ends here
