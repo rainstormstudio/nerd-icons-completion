@@ -5,7 +5,7 @@
 ;; Author: Hongyu Ding <rainstormstudio@yahoo.com>
 ;; Keywords: lisp
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "25.1") (nerd-icons "0.0.1"))
+;; Package-Requires: ((emacs "25.1") (nerd-icons "0.0.1") (compat "30"))
 ;; URL: https://github.com/rainstormstudio/nerd-icons-completion
 ;; Keywords: convenient, files, icons
 
@@ -31,6 +31,7 @@
 ;;; Code:
 
 (require 'nerd-icons)
+(require 'compat)
 
 (defgroup nerd-icons-completion nil
   "Add icons to completion candidates."
