@@ -5,7 +5,7 @@
 ;; Author: Hongyu Ding <rainstormstudio@yahoo.com>
 ;; Keywords: lisp
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "25.1") (nerd-icons "0.0.1"))
+;; Package-Requires: ((emacs "25.1") (nerd-icons "0.0.1") (compat "30"))
 ;; URL: https://github.com/rainstormstudio/nerd-icons-completion
 ;; Keywords: convenient, files, icons
 
@@ -30,6 +30,7 @@
 
 ;;; Code:
 
+(require 'compat)
 (require 'nerd-icons)
 
 (defgroup nerd-icons-completion nil
@@ -139,8 +140,8 @@ PROP is the property which is looked up."
   "Add icons to completion candidates."
   :global t
   (if nerd-icons-completion-mode
-      (advice-add #'completion-metadata-get :around #'nerd-icons-completion-completion-metadata-get)
-    (advice-remove #'completion-metadata-get #'nerd-icons-completion-completion-metadata-get)))
+      (advice-add (compat-function completion-metadata-get) :around #'nerd-icons-completion-completion-metadata-get)
+    (advice-remove (compat-function completion-metadata-get) #'nerd-icons-completion-completion-metadata-get)))
 
 (provide 'nerd-icons-completion)
 ;;; nerd-icons-completion.el ends here
