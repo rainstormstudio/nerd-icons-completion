@@ -141,8 +141,8 @@ PROP is the property which is looked up."
   :global t
   (if nerd-icons-completion-mode
       (progn
-	(advice-add #'completion-metadata-get :around #'nerd-icons-completion-completion-metadata-get)
-	(advice-add (compat-function completion-metadata-get) :around #'nerd-icons-completion-completion-metadata-get))
+        (advice-add #'completion-metadata-get :around #'nerd-icons-completion-completion-metadata-get)
+        (advice-add (compat-function completion-metadata-get) :around #'nerd-icons-completion-completion-metadata-get))
     (progn
       (advice-remove #'completion-metadata-get #'nerd-icons-completion-completion-metadata-get)
       (advice-remove (compat-function completion-metadata-get) #'nerd-icons-completion-completion-metadata-get))))
