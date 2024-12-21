@@ -77,7 +77,7 @@
 (autoload 'bookmark-get-filename "bookmark")
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql bookmark)))
   "Return the icon for the candidate CAND of completion category bookmark."
-  (if-let (fname (bookmark-get-filename cand))
+  (if-let* ((fname (bookmark-get-filename cand)))
       (nerd-icons-completion-get-icon fname 'file)
     (concat (nerd-icons-octicon "nf-oct-bookmark" :face 'nerd-icons-completion-dir-face) " ")))
 
@@ -89,7 +89,7 @@ PROP is the property which is looked up."
   (if (eq prop 'affixation-function)
       (let ((cat (funcall orig metadata 'category))
             (aff (or (funcall orig metadata 'affixation-function)
-                     (when-let ((ann (funcall orig metadata 'annotation-function)))
+                     (when-let* ((ann (funcall orig metadata 'annotation-function)))
                        (lambda (cands)
                          (mapcar (lambda (x) (list x "" (funcall ann x))) cands))))))
         (cond
