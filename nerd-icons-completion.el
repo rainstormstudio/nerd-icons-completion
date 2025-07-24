@@ -76,13 +76,31 @@
 (defface nerd-icons-completion-package-face
   '((((background dark)) :foreground "#D4843E")
     (((background light)) :foreground "#D4843E"))
-  "Face for the help icon."
+  "Face for the package icon."
   :group 'nerd-icons-faces)
 
 (defface nerd-icons-completion-help-face
   '((((background dark)) :foreground "#E69DD6")
     (((background light)) :foreground "#E69DD6"))
   "Face for the help icon."
+  :group 'nerd-icons-faces)
+
+(defface nerd-icons-completion-face-face
+  '((((background dark)) :foreground "#F2B4B8")
+    (((background light)) :foreground "#FC505B"))
+  "Face for the face icon."
+  :group 'nerd-icons-faces)
+
+(defface nerd-icons-completion-input-method-face
+  '((((background dark)) :foreground "#2188b6")
+    (((background light)) :foreground "#2188b6"))
+  "Face for the input-method icon."
+  :group 'nerd-icons-faces)
+
+(defface nerd-icons-completion-coding-system-face
+  '((((background dark)) :foreground "#E69DD6")
+    (((background light)) :foreground "#E69DD6"))
+  "Face for the coding-system icon."
   :group 'nerd-icons-faces)
 
 (cl-defgeneric nerd-icons-completion-get-icon (_cand _cat)
@@ -138,6 +156,24 @@
   (concat (nerd-icons-mdicon "nf-md-help_box"
                              :height nerd-icons-completion-icon-size
                              :face 'nerd-icons-completion-help-face) " "))
+
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql face)))
+  "Return the icon for the candidate CAND of completion category face."
+  (concat (nerd-icons-mdicon "nf-md-format_color_fill"
+                             :height nerd-icons-completion-icon-size
+                             :face 'nerd-icons-completion-face-face) " "))
+
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql input-method)))
+  "Return the icon for the candidate CAND of completion category input-method."
+  (concat (nerd-icons-faicon "nf-fa-keyboard"
+                             :height nerd-icons-completion-icon-size
+                             :face 'nerd-icons-completion-input-method-face) " "))
+
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql coding-system)))
+  "Return the icon for the candidate CAND of completion category coding-system."
+  (concat (nerd-icons-codicon "nf-cod-file_binary"
+                             :height nerd-icons-completion-icon-size
+                             :face 'nerd-icons-completion-coding-system-face) " "))
 
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
