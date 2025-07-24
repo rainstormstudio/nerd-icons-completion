@@ -49,6 +49,18 @@
   "Face for the directory icon."
   :group 'nerd-icons-faces)
 
+(defface nerd-icons-completion-command-face
+  '((((background dark)) :foreground "#6A9FB5")
+    (((background light)) :foreground "#6A9FB5"))
+  "Face for the command icon."
+  :group 'nerd-icons-faces)
+
+(defface nerd-icons-completion-help-face
+  '((((background dark)) :foreground "#E69DD6")
+    (((background light)) :foreground "#E69DD6"))
+  "Face for the help icon."
+  :group 'nerd-icons-faces)
+
 (cl-defgeneric nerd-icons-completion-get-icon (_cand _cat)
   "Return the icon for the candidate CAND of completion category CAT."
   "")
@@ -66,6 +78,18 @@
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql project-file)))
   "Return the icon for the candidate CAND of completion category project-file."
   (nerd-icons-completion-get-icon cand 'file))
+
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql command)))
+  "Return the icon for the candidate CAND of completion category command."
+  (concat (nerd-icons-codicon "nf-cod-symbol_method"
+                              :height nerd-icons-completion-icon-size
+                              :face 'nerd-icons-completion-command-face) " "))
+
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql symbol-help)))
+  "Return the icon for the candidate CAND of completion category symbol-help."
+  (concat (nerd-icons-mdicon "nf-md-help_box"
+                             :height nerd-icons-completion-icon-size
+                             :face 'nerd-icons-completion-help-face) " "))
 
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
