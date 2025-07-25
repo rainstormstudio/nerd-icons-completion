@@ -49,10 +49,13 @@
     (theme         . (nerd-icons-faicon  "nf-fae-palette_color"      nerd-icons-yellow))
     (symbol        . (nerd-icons-mdicon  "nf-md-symbol"              nerd-icons-dblue))
     (variable      . (nerd-icons-codicon "nf-cod-symbol_variable"    nerd-icons-lpurple))
+    (function      . (nerd-icons-codicon "nf-cod-symbol_method"      nerd-icons-blue))
     (package       . (nerd-icons-codicon "nf-cod-package"            nerd-icons-orange))
     (symbol-help   . (nerd-icons-mdicon  "nf-md-help_box"            nerd-icons-lpurple))
     (face          . (nerd-icons-mdicon  "nf-md-format_color_fill"   nerd-icons-pink))
     (input-method  . (nerd-icons-faicon  "nf-fa-keyboard"            nerd-icons-blue-alt))
+    (org-roam-node . (nerd-icons-codicon "nf-cod-note"               nerd-icons-silver))
+    (imenu         . (nerd-icons-octicon "nf-oct-dot_fill"           nerd-icons-lblue))
     (coding-system . (nerd-icons-codicon "nf-cod-file_binary"        nerd-icons-lpurple)))
   "Alist of icons for completion categories."
   :group 'nerd-icons-completion
