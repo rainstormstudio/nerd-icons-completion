@@ -56,6 +56,7 @@
     (input-method  . (nerd-icons-faicon  "nf-fa-keyboard"            nerd-icons-blue-alt))
     (org-roam-node . (nerd-icons-codicon "nf-cod-note"               nerd-icons-silver))
     (imenu         . (nerd-icons-octicon "nf-oct-dot_fill"           nerd-icons-lblue))
+    (kill-ring     . (nerd-icons-mdicon  "nf-md-text"                nerd-icons-silver))
     (coding-system . (nerd-icons-codicon "nf-cod-file_binary"        nerd-icons-lpurple)))
   "Alist of icons for completion categories."
   :group 'nerd-icons-completion
