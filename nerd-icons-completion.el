@@ -63,6 +63,39 @@
   :type '(alist :key-type symbol
                 :value-type (list symbol string symbol)))
 
+(defcustom nerd-icons-completion-eglot-icons
+  '((1  . (nerd-icons-codicon "nf-cod-text_size"          font-lock-doc-face))               ;; Text
+    (2  . (nerd-icons-codicon "nf-cod-symbol_method"      font-lock-function-name-face))     ;; Method
+    (3  . (nerd-icons-codicon "nf-cod-symbol_method"      font-lock-function-name-face))     ;; Function
+    (4  . (nerd-icons-codicon "nf-cod-triangle_right"     font-lock-function-name-face))     ;; Constructor
+    (5  . (nerd-icons-codicon "nf-cod-symbol_field"       font-lock-variable-name-face))     ;; Field
+    (6  . (nerd-icons-codicon "nf-cod-symbol_variable"    font-lock-variable-name-face))     ;; Variable
+    (7  . (nerd-icons-codicon "nf-cod-symbol_class"       font-lock-type-face))              ;; Class
+    (8  . (nerd-icons-codicon "nf-cod-symbol_interface"   font-lock-type-face))              ;; Interface
+    (9  . (nerd-icons-codicon "nf-cod-file_submodule"     font-lock-preprocessor-face))      ;; Module
+    (10 . (nerd-icons-codicon "nf-cod-symbol_property"    font-lock-variable-name-face))     ;; Property
+    (11 . (nerd-icons-codicon "nf-cod-symbol_ruler"       font-lock-constant-face))          ;; Unit
+    (12 . (nerd-icons-codicon "nf-cod-symbol_field"       font-lock-builtin-face))           ;; Value
+    (13 . (nerd-icons-codicon "nf-cod-symbol_enum"        font-lock-builtin-face))           ;; Enum
+    (14 . (nerd-icons-codicon "nf-cod-symbol_keyword"     font-lock-keyword-face))           ;; Keyword
+    (15 . (nerd-icons-codicon "nf-cod-symbol_snippet"     font-lock-string-face))            ;; Snippet
+    (16 . (nerd-icons-codicon "nf-cod-symbol_color"       success))                          ;; Color
+    (17 . (nerd-icons-codicon "nf-cod-file"               font-lock-string-face))            ;; File
+    (18 . (nerd-icons-codicon "nf-cod-references"         font-lock-variable-name-face))     ;; Reference
+    (19 . (nerd-icons-codicon "nf-cod-folder"             font-lock-string-face))            ;; Folder
+    (20 . (nerd-icons-codicon "nf-cod-symbol_enum_member" font-lock-builtin-face))           ;; EnumMember
+    (21 . (nerd-icons-codicon "nf-cod-symbol_constant"    font-lock-constant-face))          ;; Constant
+    (22 . (nerd-icons-codicon "nf-cod-symbol_structure"   font-lock-variable-name-face))     ;; Struct
+    (23 . (nerd-icons-codicon "nf-cod-symbol_event"       font-lock-warning-face))           ;; Event
+    (24 . (nerd-icons-codicon "nf-cod-symbol_operator"    font-lock-comment-delimiter-face)) ;; Operator
+    (25 . (nerd-icons-codicon "nf-cod-list_unordered"     font-lock-type-face)))             ;; TypeParameter
+  "Alist of icons for eglot completion.
+
+This should map the kind to `eglot--kind-names'."
+  :group 'nerd-icons-completion
+  :type '(alist :key-type int
+                :value-type (list symbol string symbol)))
+
 (defface nerd-icons-completion-dir-face
   '((t nil))
   "Face for the directory icon."
@@ -94,6 +127,17 @@
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql project-file)))
   "Return the icon for the candidate CAND of completion category project-file."
   (nerd-icons-completion-get-icon cand 'file))
+
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot-capf)))
+  "Return the icon for the candidate CAND of completion category eglot-capf."
+  (if-let* ((orig (get-text-property 0 'eglot--lsp-item cand))
+            (kind (plist-get orig :kind))
+            (spec (cdr (assoc kind nerd-icons-completion-eglot-icons)))
+            (icon-fn (nth 0 spec))
+            (icon-name (nth 1 spec))
+            (face (nth 2 spec)))
+      (concat (funcall icon-fn icon-name :height nerd-icons-completion-icon-size :face face) " ")
+    ""))
 
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
