@@ -63,7 +63,7 @@
   :type '(alist :key-type symbol
                 :value-type (list symbol string symbol)))
 
-(defcustom nerd-icons-completion-eglot-icons
+(defcustom nerd-icons-completion-lsp-icons
   '((1  . (nerd-icons-codicon "nf-cod-text_size"          font-lock-doc-face))               ;; Text
     (2  . (nerd-icons-codicon "nf-cod-symbol_method"      font-lock-function-name-face))     ;; Method
     (3  . (nerd-icons-codicon "nf-cod-symbol_method"      font-lock-function-name-face))     ;; Function
@@ -89,9 +89,9 @@
     (23 . (nerd-icons-codicon "nf-cod-symbol_event"       font-lock-warning-face))           ;; Event
     (24 . (nerd-icons-codicon "nf-cod-symbol_operator"    font-lock-comment-delimiter-face)) ;; Operator
     (25 . (nerd-icons-codicon "nf-cod-list_unordered"     font-lock-type-face)))             ;; TypeParameter
-  "Alist of icons for eglot completion.
+  "Alist of icons for lsp/eglot completion.
 
-This should map the kind to `eglot--kind-names'."
+This should map the kind to `eglot--kind-names' and `lsp-completion--kind->symbol'."
   :group 'nerd-icons-completion
   :type '(alist :key-type int
                 :value-type (list symbol string symbol)))
@@ -132,7 +132,7 @@ This should map the kind to `eglot--kind-names'."
   "Return the icon for the candidate CAND of completion category eglot."
   (if-let* ((orig (get-text-property 0 'eglot--lsp-item cand))
             (kind (plist-get orig :kind))
-            (spec (cdr (assoc kind nerd-icons-completion-eglot-icons)))
+            (spec (cdr (assoc kind nerd-icons-completion-lsp-icons)))
             (icon-fn (nth 0 spec))
             (icon-name (nth 1 spec))
             (face (nth 2 spec)))
@@ -142,6 +142,17 @@ This should map the kind to `eglot--kind-names'."
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot-capf)))
   "Return the icon for the candidate CAND of completion category eglot-capf."
   (nerd-icons-completion-get-icon cand 'eglot))
+
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql lsp-capf)))
+  "Return the icon for the candidate CAND of completion category lsp-capf."
+  (if-let* ((orig (get-text-property 0 'lsp-completion-item cand))
+            (kind (lsp:completion-item-kind? orig))
+            (spec (cdr (assoc kind nerd-icons-completion-lsp-icons)))
+            (icon-fn (nth 0 spec))
+            (icon-name (nth 1 spec))
+            (face (nth 2 spec)))
+      (concat (funcall icon-fn icon-name :height nerd-icons-completion-icon-size :face face) " ")
+    ""))
 
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
