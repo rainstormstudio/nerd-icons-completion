@@ -128,8 +128,8 @@ This should map the kind to `eglot--kind-names'."
   "Return the icon for the candidate CAND of completion category project-file."
   (nerd-icons-completion-get-icon cand 'file))
 
-(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot-capf)))
-  "Return the icon for the candidate CAND of completion category eglot-capf."
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot)))
+  "Return the icon for the candidate CAND of completion category eglot."
   (if-let* ((orig (get-text-property 0 'eglot--lsp-item cand))
             (kind (plist-get orig :kind))
             (spec (cdr (assoc kind nerd-icons-completion-eglot-icons)))
@@ -139,9 +139,9 @@ This should map the kind to `eglot--kind-names'."
       (concat (funcall icon-fn icon-name :height nerd-icons-completion-icon-size :face face) " ")
     ""))
 
-(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot)))
-  "Return the icon for the candidate CAND of completion category eglot."
-  (nerd-icons-completion-get-icon cand 'eglot-capf))
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot-capf)))
+  "Return the icon for the candidate CAND of completion category eglot-capf."
+  (nerd-icons-completion-get-icon cand 'eglot))
 
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
