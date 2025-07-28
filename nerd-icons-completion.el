@@ -139,6 +139,10 @@ This should map the kind to `eglot--kind-names'."
       (concat (funcall icon-fn icon-name :height nerd-icons-completion-icon-size :face face) " ")
     ""))
 
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot)))
+  "Return the icon for the candidate CAND of completion category eglot."
+  (nerd-icons-completion-get-icon cand 'eglot-capf))
+
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
   (let* ((mode (buffer-local-value 'major-mode (get-buffer cand)))
