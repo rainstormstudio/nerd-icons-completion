@@ -91,7 +91,8 @@
     (25 . (nerd-icons-codicon "nf-cod-list_unordered"     font-lock-type-face)))             ;; TypeParameter
   "Alist of icons for lsp/eglot completion.
 
-This should map the kind to `eglot--kind-names' and `lsp-completion--kind->symbol'."
+This should map the kind to `eglot--kind-names' and
+`lsp-completion--kind->symbol'."
   :group 'nerd-icons-completion
   :type '(alist :key-type int
                 :value-type (list symbol string symbol)))
@@ -142,6 +143,8 @@ This should map the kind to `eglot--kind-names' and `lsp-completion--kind->symbo
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql eglot-capf)))
   "Return the icon for the candidate CAND of completion category eglot-capf."
   (nerd-icons-completion-get-icon cand 'eglot))
+
+(declare-function lsp:completion-item-kind? "ext:lsp-mode")
 
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql lsp-capf)))
   "Return the icon for the candidate CAND of completion category lsp-capf."
