@@ -175,11 +175,12 @@ This should map the kind to `eglot--kind-names' and
 (autoload 'bookmark-get-filename "bookmark")
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql bookmark)))
   "Return the icon for the candidate CAND of completion category bookmark."
-  (if-let* ((fname (bookmark-get-filename cand)))
-      (nerd-icons-completion-get-icon fname 'file)
-    (concat (nerd-icons-octicon "nf-oct-bookmark"
-                                :face 'nerd-icons-completion-dir-face
-                                :height nerd-icons-completion-icon-size) " ")))
+  (when-let ((bm (assoc cand (bound-and-true-p bookmark-alist))))
+    (if-let* ((fname (bookmark-get-filename cand)))
+        (nerd-icons-completion-get-icon fname 'file)
+      (concat (nerd-icons-octicon "nf-oct-bookmark"
+                                  :face 'nerd-icons-completion-dir-face
+                                  :height nerd-icons-completion-icon-size) " "))))
 
 (defun nerd-icons-completion-completion-metadata-get (orig metadata prop)
   "Meant as :around advice for `completion-metadata-get', Add icons as prefix.
