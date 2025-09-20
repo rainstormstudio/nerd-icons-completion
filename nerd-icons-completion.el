@@ -192,7 +192,7 @@ PROP is the property which is looked up."
             (aff (or (funcall orig metadata 'affixation-function)
                      (when-let* ((ann (funcall orig metadata 'annotation-function)))
                        (lambda (cands)
-                         (mapcar (lambda (x) (list x "" (funcall ann x))) cands))))))
+                         (mapcar (lambda (x) (list x "" (or (funcall ann x) ""))) cands))))))
         (cond
          ((and (eq cat 'multi-category) aff)
           (lambda (cands)
