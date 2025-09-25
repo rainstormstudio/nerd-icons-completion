@@ -57,7 +57,8 @@
     (org-roam-node . (nerd-icons-codicon "nf-cod-note"               nerd-icons-silver))
     (imenu         . (nerd-icons-octicon "nf-oct-dot_fill"           nerd-icons-lblue))
     (kill-ring     . (nerd-icons-mdicon  "nf-md-text"                nerd-icons-silver))
-    (coding-system . (nerd-icons-codicon "nf-cod-file_binary"        nerd-icons-lpurple)))
+    (coding-system . (nerd-icons-codicon "nf-cod-file_binary"        nerd-icons-lpurple))
+    (nil           . (nerd-icons-codicon "nf-cod-arrow_small_right"  nerd-icons-silver)))
   "Alist of icons for completion categories."
   :group 'nerd-icons-completion
   :type '(alist :key-type symbol
@@ -205,7 +206,7 @@ PROP is the property which is looked up."
                                          prefix)
                                  suffix)))))
                     (funcall aff cands))))
-         ((and cat aff)
+         (aff
           (lambda (cands)
             (mapcar (lambda (x)
                       (pcase-exhaustive x
@@ -221,12 +222,11 @@ PROP is the property which is looked up."
                       (let ((orig (get-text-property 0 'multi-category x)))
                         (list x (nerd-icons-completion-get-icon (cdr orig) (car orig)) "")))
                     cands)))
-         (cat
+         (t
           (lambda (cands)
             (mapcar (lambda (x)
                       (list x (nerd-icons-completion-get-icon x cat) ""))
-                    cands)))
-         (aff)))
+                    cands)))))
     (funcall orig metadata prop)))
 
 ;; For the byte compiler
