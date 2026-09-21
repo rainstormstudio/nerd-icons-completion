@@ -170,6 +170,10 @@ This should map the kind to `eglot--kind-names' and
          " "))
     ""))
 
+(cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql project-buffer)))
+  "Return the icon for the candidate CAND of completion category project-buffer."
+  (nerd-icons-completion-get-icon cand 'buffer))
+
 (autoload 'bookmark-get-filename "bookmark")
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql bookmark)))
   "Return the icon for the candidate CAND of completion category bookmark."
