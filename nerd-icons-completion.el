@@ -160,7 +160,8 @@ This should map the kind to `eglot--kind-names' and
 
 (cl-defmethod nerd-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
-  (if-let* ((buf (get-buffer cand)))
+  (if-let* ((buf (get-buffer cand))
+            ((buffer-live-p buf)))
       (let ((icon (with-current-buffer buf
                     (nerd-icons-icon-for-buffer :height nerd-icons-completion-icon-size))))
         (concat
